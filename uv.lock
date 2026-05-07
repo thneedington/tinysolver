@@ -1,0 +1,36 @@
+version = 1
+revision = 3
+requires-python = ">=3.11"
+
+[[package]]
+name = "pokerkit"
+version = "0.7.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/42/14/9f18d8389569718542a6886ab7130be53477fadb513be7e356737f405bdb/pokerkit-0.7.3.tar.gz", hash = "sha256:16a13b08b51ef360bc8ed5e8202543ac92fe4d782f3fec1c94d7b50187b6f21f", size = 109422, upload-time = "2026-01-16T00:58:34.394Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3b/be/234f1b32483a4a500dc297a5b8ff82cfa0a6b638b14e9eeebda0bca07eed/pokerkit-0.7.3-py3-none-any.whl", hash = "sha256:b03240dbe224ae627d94be2995ee39511d139ae54c768ec92b13d2606d4280d7", size = 113716, upload-time = "2026-01-16T00:58:32.807Z" },
+]
+
+[[package]]
+name = "tinygrad"
+version = "0.12.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b2/8c/83bc0895d78d335bd3f5ceadb8a6750c1834f058a0f7e5ee763dc0d626bf/tinygrad-0.12.0.tar.gz", hash = "sha256:299cd53d9452b8689b36c7026c866b73d1e4a862ec53a8ea5bc2a412358c1bbf", size = 1761546, upload-time = "2026-01-12T17:05:09.611Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1a/1e/034a535398b1fca9e9a0ece0bc870c122c79c80866eca3ed802bfea7b0df/tinygrad-0.12.0-py3-none-any.whl", hash = "sha256:275c01961e0959579ba99c6ce1ed70a2c2f1a408ed8cfb5c4de8ad1355e66611", size = 1673238, upload-time = "2026-01-12T17:05:06.727Z" },
+]
+
+[[package]]
+name = "tinysolver"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "pokerkit" },
+    { name = "tinygrad" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pokerkit", specifier = ">=0.7.3" },
+    { name = "tinygrad", specifier = ">=0.9.2" },
+]

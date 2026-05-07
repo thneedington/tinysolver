@@ -1,0 +1,10 @@
+[project]
+name = "tinysolver"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pokerkit>=0.7.3",
+    "tinygrad>=0.9.2",
+]
