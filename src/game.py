@@ -1,4 +1,5 @@
 from pokerkit import Automation, Mode, NoLimitTexasHoldem
+import numpy as np
 
 class Holdem:
 
@@ -53,13 +54,23 @@ class Holdem:
 
 
     def play_hand():
+        '''
+        play a hand
+        '''
+
+        # clean state and rotate dealer position        
         state = reset()
 
+        # play
         while not self.state.status.is_finished():
             self.play_street()
 
 
     def play_street():
+        '''
+        play one street of the current hand
+        '''
+
         # get action from each player until street is finished
         while state.actor_index is not None:
             action_type, amount = get_action_from_current_player()
@@ -88,6 +99,7 @@ class Holdem:
         '''
          send encoded state to current actor, get action
         '''
+
         current_actor = self.state.actor_index
         encoded_state = encode_state(state)
         player_action, amount = self.model.get_action(current_actor, encoded_state)
@@ -96,6 +108,20 @@ class Holdem:
 
 
     def encode_state(self):
+        '''
+        encode hand state
+
+        one hot vectors for:
+            hole cards
+            board cards
+            street
+            position
+        
+        normalized:
+            stack size
+            pot size
+            current street action
+        '''
         state = self.state
         actor = state.actor_index
 
@@ -136,6 +162,9 @@ class Holdem:
 
     
     def encode_cards(cards, max_cards = 5):
+        '''
+        encode cards to one hot vector
+        '''
         encoding = np.zeros(max_cards * 52)
         for i, card in enumerate(cards):
             encoding[i * 52 + card.index] = 1
