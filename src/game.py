@@ -11,6 +11,7 @@ class Holdem:
         self.ante: ante = ante
         self.state = self.reset_game()
         self.hand_count = 0
+        self.model = None # TODO: add
 
     def reset_game(self):
         return reset(self.stacks, self.small_blind, self.big_blind, self.ante)
