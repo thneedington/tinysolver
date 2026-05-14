@@ -3,18 +3,18 @@ import numpy as np
 
 class Holdem:
 
-    def __init__(self, stacks, small_blind, big_blind, ante)
+    def __init__(self, stacks, small_blind, big_blind, ante):
         self.stacks = stacks
         self.num_players = len(stacks)
         self.small_blind: int = small_blind
         self.big_blind: int = big_blind
-        self.ante: ante = ante
+        self.ante: int = ante
         self.state = self.reset_game()
         self.hand_count = 0
         self.model = None # TODO: add
 
     def reset_game(self):
-        return reset(self.stacks, self.small_blind, self.big_blind, self.ante)
+        return self.reset(self.stacks, self.small_blind, self.big_blind, self.ante)
 
     def reset(self, stacks, small_blind=50, big_blind=100, ante=0):
         '''
@@ -54,34 +54,34 @@ class Holdem:
         return state
 
 
-    def play_hand():
+    def play_hand(self):
         '''
         play a hand
         '''
 
         # clean state and rotate dealer position        
-        state = reset()
+        self.state = self.reset()
 
         # play
         while not self.state.status.is_finished():
             self.play_street()
 
 
-    def play_street():
+    def play_street(self):
         '''
         play one street of the current hand
         '''
 
         # get action from each player until street is finished
-        while state.actor_index is not None:
-            action_type, amount = get_action_from_current_player()
+        while self.state.actor_index is not None:
+            action_type, amount = self.get_action_from_current_player()
             
             if action_type == "fold":
-                state.fold()
+                self.state.fold()
             if action_type == "call":
-                state.check_or_call()
+                self.state.check_or_call()
             if action_type == "raise":
-                state.complete_bet_or_raise_to(amount)
+                self.state.complete_bet_or_raise_to(amount)
 
         # if the hand is over, stop
         if self.state.status.is_finished():
@@ -96,13 +96,13 @@ class Holdem:
             pass
             
 
-    def get_action_from_current_player():
+    def get_action_from_current_player(self):
         '''
          send encoded state to current actor, get action
         '''
 
         current_actor = self.state.actor_index
-        encoded_state = encode_state(state)
+        encoded_state = self.encode_state(self.state)
         player_action, amount = self.model.get_action(current_actor, encoded_state)
         
         return player_action, amount
